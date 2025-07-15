@@ -1,193 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dayo's Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background: #f4f4f4; color: #333; }
+    header {
+      background: #222; color: #fff; padding: 1rem; text-align: center; position: relative;
     }
-
-    body {
-      background-color: #f4f4f4;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    header, footer {
-      background: #222;
-      color: white;
-      padding: 1rem 0;
-      text-align: center;
-    }
-
+    header h1 { margin-bottom: 0.3rem; }
+    nav { background: #444; }
     nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      background: #444;
-      padding: 0.5rem 0;
+      list-style: none; display: flex; justify-content: center; flex-wrap: wrap;
     }
-
-    nav ul li {
-      margin: 0 1rem;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
+    nav ul li { margin: 0.5rem; }
+    nav ul li a { color: #fff; text-decoration: none; font-weight: bold; }
     .hero {
-      background: linear-gradient(to right, #111, #333);
-      color: white;
-      padding: 4rem 2rem;
-      text-align: center;
+      background: linear-gradient(to right, #111, #333); color: #fff;
+      padding: 4rem 2rem; text-align: center;
     }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
     .hero a.button {
-      display: inline-block;
-      padding: 0.7rem 1.5rem;
-      background: #ff6347;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s ease;
+      background: #ff6347; padding: 0.7rem 1.5rem;
+      border-radius: 5px; color: #fff; text-decoration: none;
     }
-
-    .hero a.button:hover {
-      background: #ff4500;
-    }
-
-    section {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
+    section { padding: 2rem; max-width: 1000px; margin: auto; }
     .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;
     }
-
     .project {
-      background: white;
-      padding: 1rem;
+      background: #fff; padding: 1rem; border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 8px;
     }
-
-    .project img {
-      max-width: 100%;
-      border-radius: 5px;
-    }
-
-    .project h3 {
-      margin-top: 0.5rem;
-    }
-
+    .project img { max-width: 100%; border-radius: 5px; }
+    .project h3 { margin-top: 0.5rem; }
     .contact-icons {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+      font-size: 2rem; margin-top: 1rem;
     }
-
     .contact-icons a {
-      text-decoration: none;
-      font-size: 1.5rem;
-      color: #444;
+      color: #222; text-decoration: none; transition: color 0.3s; cursor: pointer;
     }
+    .contact-icons a:hover { color: #ff6347; }
+    footer {
+      background: #222; color: #fff; text-align: center;
+      padding: 1rem; margin-top: 2rem;
+    }
+    .menu-toggle {
+      display: none; position: absolute; right: 1rem; top: 50%;
+      transform: translateY(-50%); cursor: pointer; font-size: 2rem; color: #fff;
+    }
+    @media(max-width: 768px) {
+      nav ul {
+        display: none; flex-direction: column; background: #444;
+        position: absolute; width: 100%; left: 0; top: 60px;
+      }
+      nav ul.show { display: flex; }
+      .menu-toggle { display: block; }
+    }
+    /* Modal Styles */
+    .modal {
+      display: none; position: fixed; z-index: 999; left: 0; top: 0;
+      width: 100%; height: 100%; overflow: auto;
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .modal-content {
+      background: #fff; margin: 10% auto; padding: 2rem;
+      border-radius: 8px; width: 90%; max-width: 500px; position: relative;
+    }
+    .close {
+      position: absolute; top: 10px; right: 20px; font-size: 1.5rem;
+      cursor: pointer; color: #333;
+    }
+    .modal-content h2 { margin-bottom: 1rem; }
+    .modal-content input, .modal-content textarea {
+      width: 100%; padding: 0.7rem; margin: 0.5rem 0;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    .modal-content button {
+      background: #ff6347; color: #fff; border: none;
+      padding: 0.7rem 1.5rem; border-radius: 4px; cursor: pointer;
+      transition: box-shadow 0.3s;
+    }
+    .modal-content button:hover { box-shadow: 0 0 10px #ff6347; }
   </style>
+  <script>
+    function toggleMenu() {
+      document.getElementById('nav-list').classList.toggle('show');
+    }
+    function openModal() {
+      document.getElementById('emailModal').style.display = 'block';
+    }
+    function closeModal() {
+      document.getElementById('emailModal').style.display = 'none';
+    }
+    window.onclick = function(e) {
+      if (e.target == document.getElementById('emailModal')) closeModal();
+    }
+    window.onload = function() {
+      const navLinks = document.querySelectorAll('nav ul li a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          const navList = document.getElementById('nav-list');
+          if (navList.classList.contains('show')) navList.classList.remove('show');
+        });
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
-    <h1>Oludayo Oluboyede</h1>
+    <h2>Oludayo Oluboyede</h2>
     <p>Full-Stack Web Developer</p>
+    <span class="menu-toggle" onclick="toggleMenu()">&#9776;</span>
   </header>
-
   <nav>
-    <ul>
+    <ul id="nav-list">
       <li><a href="#hero">Home</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#certificates">Certificates</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
-
   <section id="hero" class="hero">
     <h1>Welcome to My Digital Dynasty</h1>
     <p>I build web applications that solve real-world problems. Clean. Fast. Secure.</p>
     <a href="#portfolio" class="button">See My Work</a>
   </section>
-
   <section id="portfolio">
     <h2>Projects Completed</h2>
     <div class="portfolio-grid">
-      <div class="project">
-        <a href="https://artbymoinspired.com.ng"><img src="images/IMG-20231116-WA0029.jpg" alt="Art by Mo" /></a>
-        <h3>Art by Mo Inspired</h3>
-      </div>
-      <div class="project">
-        <a href="https://kingdarius.artbymoinspired.com.ng"><img src="images/orange nigga.jpg" alt="Dynasty Law" /></a>
-        <h3>Dynasty Law</h3>
-      </div>
-      <div class="project">
-        <a href="https://vibras.artbymoinspired.com.ng"><img src="images/cry potrait 32.jpg" alt="Vibra Sport" /></a>
-        <h3>Vibra Sport (WordPress)</h3>
-      </div>
+      <div class="project"><a href="https://artbymoinspired.com.ng"><img src="images/IMG-20231116-WA0029.jpg" alt="Art by Mo"></a><h3>Art by Mo Inspired</h3></div>
+      <div class="project"><a href="https://kingdarius.artbymoinspired.com.ng"><img src="images/orange nigga.jpg" alt="Dynasty Law"></a><h3>Dynasty Law</h3></div>
+      <div class="project"><a href="https://vibras.artbymoinspired.com.ng"><img src="images/cry potrait 32.jpg" alt="Vibra Sport"></a><h3>Vibra Sport (WordPress)</h3></div>
     </div>
   </section>
-
   <section id="certificates">
     <h2>Certificates</h2>
     <div class="portfolio-grid">
-      <div class="project">
-        <img src="images/Skinny Certifications/Effetive Listening.jpeg" alt="Effective Listening">
-        <h3>Effective Listening</h3>
-      </div>
-      <div class="project">
-        <img src="images/Skinny Certifications/Communication Foundations.jpeg" alt="Communication Foundations">
-        <h3>Communication Foundations</h3>
-      </div>
-      <div class="project">
-        <img src="images/Skinny Certifications/Programming Fundamentals Foundations.jpeg" alt="Programming Fundamentals">
-        <h3>Programming Fundamentals</h3>
-      </div>
+      <div class="project"><img src="images/Skinny Certifications/Effetive Listening.jpeg" alt="Effective Listening"><h3>Effective Listening</h3></div>
+      <div class="project"><img src="images/Skinny Certifications/Communication Foundations.jpeg" alt="Communication Foundations"><h3>Communication Foundations</h3></div>
+      <div class="project"><img src="images/Skinny Certifications/Programming Fundamentals Foundations.jpeg" alt="Programming Fundamentals"><h3>Programming Fundamentals</h3></div>
     </div>
   </section>
-
   <section id="contact">
-    <h2>Contact</h2>
-    <p>Let’s build something amazing together.</p>
     <div class="contact-icons">
-      <a href="https://wa.me/message/QZ2WALFW5HQSF1" class="icon brands fa-whatsapp">WhatsApp</a>
-      <a href="https://www.facebook.com/dayo.oluboyede.3?mibextid=ZbWKwL" class="icon brands fa-facebook">Facebook</a>
-      <a href="https://discordapp.com/users/1240423521033785354" class="icon brands fa-discord">Discord</a>
-      <a href="https://www.instagram.com/dayosdigitaldynasty" class="icon brands fa-instagram">Instagram</a>
+      <a href="https://github.com/"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+      <a onclick="openModal()"><i class="fas fa-envelope"></i></a>
+      <a href="https://wa.me/message/QZ2WALFW5HQSF1"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/dayosdigitaldynasty"><i class="fab fa-instagram"></i></a>
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Oludayo Oluboyede. All rights reserved.</p>
-  </footer>
+  <!-- Modal Email Form -->
+  <div id="emailModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Send Me a Message</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 Oludayo Oluboyede. All rights reserved.</footer>
 </body>
 </html>
